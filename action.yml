@@ -1,13 +1,13 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: "flake8"
+description: "Run flake8 python code linting"
+branding:
+  icon: check-circle
+  color: green
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  checkName:
+    description: "The name of the check to add annotations to.
+      Generally the same as the job that uses this action"
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
