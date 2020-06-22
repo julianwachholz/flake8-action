@@ -1,4 +1,4 @@
-name: "flake8"
+name: python-flake8
 description: "Run flake8 python code linting"
 branding:
   icon: check-circle

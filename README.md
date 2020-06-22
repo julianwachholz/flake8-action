@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: "3.8"
       - name: Run flake8
-        uses: julianwachholz/flake8-action@master
+        uses: julianwachholz/flake8-action@v1
         with:
           checkName: "Python Lint"
         env:
