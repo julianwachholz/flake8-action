@@ -26,3 +26,5 @@ jobs:
       - uses: ./
         with:
           checkName: lint
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
