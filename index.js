@@ -23,7 +23,7 @@ async function runFlake8() {
   return output;
 }
 
-async function createCheck(check_name, title, annotations) {
+async function createCheck(check_name, title, annotations, isTest) {
   const output = {
     title,
     summary: `${annotations.length} errors(s) found`,
@@ -32,7 +32,6 @@ async function createCheck(check_name, title, annotations) {
 
   const octokit = github.getOctokit(String(GITHUB_TOKEN));
 
-  console.log("listForRef", github.context.sha);
   const res = await octokit.checks.listForRef({
     check_name,
     ref: github.context.sha,
@@ -40,15 +39,15 @@ async function createCheck(check_name, title, annotations) {
   });
 
   if (res.data.check_runs.length === 0) {
-    console.log("create check");
     await octokit.checks.create({
       ...github.context.repo,
       name: check_name,
       head_sha: github.context.sha,
+      status: "completed",
+      conclusion: isTest ? "neutral" : "failure",
       output,
     });
   } else {
-    console.log("update check");
     const check_run_id = res.data.check_runs[0].id;
     await octokit.checks.update({
       ...github.context.repo,
@@ -65,10 +64,12 @@ async function run() {
     const annotations = parseFlake8Output(output);
 
     if (annotations.length) {
-      console.log(annotations);
       const checkName = core.getInput("checkName");
-      await createCheck(checkName, "flake8 failure", annotations);
-      core.setFailed(annotations);
+      const isTest = core.getInput("isTest");
+      await createCheck(checkName, "flake8 failure", annotations, isTest);
+      if (!isTest) {
+        core.setFailed(annotations);
+      }
     }
   } catch (error) {
     core.setFailed(error.message);

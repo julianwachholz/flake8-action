@@ -26,5 +26,6 @@ jobs:
       - uses: ./
         with:
           checkName: lint
+          isTest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
