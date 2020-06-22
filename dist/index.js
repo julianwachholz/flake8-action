@@ -1224,23 +1224,30 @@ async function createCheck(check_name, title, annotations) {
 
   const res = await octokit.checks.listForRef({
     check_name,
-    ...github.context.repo,
     ref: github.context.sha,
-  });
-
-  console.debug("res", res);
-
-  const check_run_id = res.data.check_runs[0].id;
-
-  await octokit.checks.update({
     ...github.context.repo,
-    check_run_id,
-    output: {
-      title,
-      summary: `${annotations.length} errors(s) found`,
-      annotations,
-    },
   });
+
+  const output = {
+    title,
+    summary: `${annotations.length} errors(s) found`,
+    annotations,
+  };
+
+  if (res.data.check_runs.length === 0) {
+    await octokit.checks.create({
+      ...github.context.repo,
+      name: check_name,
+      output,
+    });
+  } else {
+    const check_run_id = res.data.check_runs[0].id;
+    await octokit.checks.update({
+      ...github.context.repo,
+      check_run_id,
+      output,
+    });
+  }
 }
 
 async function run() {
