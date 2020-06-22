@@ -24,12 +24,15 @@ async function runFlake8() {
 }
 
 async function createCheck(check_name, title, annotations) {
-  const octokit = new github.GitHub(String(GITHUB_TOKEN));
+  const octokit = github.getOctokit(String(GITHUB_TOKEN));
+
   const res = await octokit.checks.listForRef({
     check_name,
     ...github.context.repo,
     ref: github.context.sha,
   });
+
+  console.debug("res", res);
 
   const check_run_id = res.data.check_runs[0].id;
 
