@@ -24,22 +24,23 @@ async function runFlake8() {
 }
 
 async function createCheck(check_name, title, annotations) {
-  const octokit = github.getOctokit(String(GITHUB_TOKEN));
-
-  const res = await octokit.checks.listForRef({
-    check_name,
-    ref: github.context.sha,
-    ...github.context.repo,
-  });
-
   const output = {
     title,
     summary: `${annotations.length} errors(s) found`,
     annotations,
   };
 
+  const octokit = github.getOctokit(String(GITHUB_TOKEN));
+
+  console.log("listForRef", github.context.sha);
+  const res = await octokit.checks.listForRef({
+    check_name,
+    ref: github.context.sha,
+    ...github.context.repo,
+  });
+
   if (res.data.check_runs.length === 0) {
-    console.info(`new check: ${github.context.sha}`);
+    console.log("create check");
     await octokit.checks.create({
       ...github.context.repo,
       name: check_name,
@@ -47,8 +48,8 @@ async function createCheck(check_name, title, annotations) {
       output,
     });
   } else {
+    console.log("update check");
     const check_run_id = res.data.check_runs[0].id;
-    console.info(`update check: ${check_run_id}`);
     await octokit.checks.update({
       ...github.context.repo,
       check_run_id,
