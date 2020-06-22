@@ -2,14 +2,37 @@
   <a href="https://github.com/julianwachholz/flake8-action/actions"><img alt="flake8-action status" src="https://github.com/julianwachholz/flake8-action/workflows/units-test/badge.svg"></a>
 </p>
 
+# flake8-action
+
+Run flake8 on your Python code.
+
 ## Usage
 
-You can now consume the action by referencing the v1 branch
+Create a workflow file in your repository:
 
 ```yaml
-uses: actions/javascript-action@v1
-with:
-  milliseconds: 1000
+name: Code Quality
+
+on:
+  push:
+    paths:
+      - "**.py"
+
+jobs:
+  lint:
+    name: Python Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - name: Run flake8
+        uses: julianwachholz/flake8-action@master
+        with:
+          checkName: "Python Lint"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
+See the [actions tab](https://github.com/julianwachholz/flake8-action/actions) for runs of this action! :rocket:
