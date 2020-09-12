@@ -1267,6 +1267,7 @@ async function run() {
       await createCheck(checkName, "flake8 failure", annotations, isTest);
       if (!isTest) {
 	let leftAnnotations = [...annotations];
+	core.info(leftAnnotations.length)
       	if (leftAnnotations.length > 50) {
 		while (leftAnnotations.length > 50) {
 		let toProcess = leftAnnotations.splice(0, 50);
