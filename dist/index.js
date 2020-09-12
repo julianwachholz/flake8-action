@@ -1265,7 +1265,6 @@ async function run() {
       const checkName = core.getInput("checkName");
       const isTest = core.getInput("isTest");
 	let leftAnnotations = [...annotations];
-	core.info(leftAnnotations.length)
       	if (leftAnnotations.length > 50) {
 		while (leftAnnotations.length > 50) {
 			let toProcess = leftAnnotations.splice(0, 50);
