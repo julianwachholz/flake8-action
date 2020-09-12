@@ -1272,7 +1272,7 @@ async function run() {
 		let toProcess = leftAnnotations.splice(0, 50);
 		await createCheck(checkName, "flake8 failure", toProcess, isTest);
 		try {
-		  await core.setFailed(toProcess);
+		  core.setFailed(toProcess);
 		} catch (e) {
 		  core.setFailed(error.message);
 		}
