@@ -1274,7 +1274,7 @@ async function run() {
 		try {
 		  await core.setFailed(toProcess);
 		} catch (e) {
-		  core.setFailed(error.message);
+		  core.setFailed(error.message + "TEST2");
 		}
 	      }
 	    }
