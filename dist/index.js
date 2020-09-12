@@ -1264,24 +1264,24 @@ async function run() {
     if (annotations.length) {
       const checkName = core.getInput("checkName");
       const isTest = core.getInput("isTest");
-      await createCheck(checkName, "flake8 failure", annotations, isTest);
       if (!isTest) {
 	let leftAnnotations = [...annotations];
 	core.info(leftAnnotations.length)
       	if (leftAnnotations.length > 50) {
 		while (leftAnnotations.length > 50) {
 		let toProcess = leftAnnotations.splice(0, 50);
+		await createCheck(checkName, "flake8 failure", toProcess, isTest);
 		try {
 		  await core.setFailed(toProcess);
 		} catch (e) {
-		  core.setFailed(error.message + "TEST2");
+		  core.setFailed(error.message);
 		}
 	      }
 	    }
       }
     }
   } catch (error) {
-    core.setFailed(error.message + "TEST");
+    core.setFailed(error.message);
   }
 }
 
@@ -7761,13 +7761,14 @@ function parseFlake8Output(output) {
   let regex = new RegExp(/^(.*?):(\d+):(\d+): (\w+\d+) (.*?)$/);
   let errors = output.split("\n");
   let annotations = [];
-
+  
   const annotation_level = "failure";
 
   for (let i = 0; i < errors.length; i++) {
     let error = errors[i];
     let match = error.match(regex);
     if (match) {
+      if match
       // Chop `./` off the front so that Github will recognize the file path
       const normalized_path = match[1].replace("./", "");
       const line = parseInt(match[2]);
