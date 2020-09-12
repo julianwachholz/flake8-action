@@ -7768,7 +7768,7 @@ function parseFlake8Output(output) {
     let error = errors[i];
     let match = error.match(regex);
     if (match) {
-      if match
+      //if match
       // Chop `./` off the front so that Github will recognize the file path
       const normalized_path = match[1].replace("./", "");
       const line = parseInt(match[2]);
