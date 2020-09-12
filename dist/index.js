@@ -1271,7 +1271,7 @@ async function run() {
 		while (leftAnnotations.length > 50) {
 		let toProcess = leftAnnotations.splice(0, 50);
 		try {
-		  core.setFailed(toProcess);
+		  await core.setFailed(toProcess);
 		} catch (e) {
 		  core.setFailed(error.message);
 		}
