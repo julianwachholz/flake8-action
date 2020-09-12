@@ -12,7 +12,7 @@ inputs:
     description: "Used for internal tests."
   path:
     description: "Path to use for flake8"
-    default: .
+    default: ""
 runs:
   using: "node12"
   main: "dist/index.js"
