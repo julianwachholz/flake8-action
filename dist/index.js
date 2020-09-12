@@ -1216,6 +1216,7 @@ async function runFlake8() {
       },
     },
   };
+  await exec.exec("ls")
   await exec.exec("flake8 "+ path + " --exit-zero", [], options);
   return output;
 }
