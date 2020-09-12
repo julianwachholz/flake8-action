@@ -10,6 +10,7 @@ inputs:
     required: true
   isTest:
     description: "Used for internal tests."
+    default: false
   path:
     description: "Path to use for flake8"
     default: ""
