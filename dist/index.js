@@ -1274,7 +1274,7 @@ async function run() {
 		try {
 		  await core.setFailed(toProcess);
 		} catch (e) {
-		  core.info(toProcess.length)
+		  core.setFailed(toProcess.length)
 		  core.setFailed(error.message);
 		}
 	      }
