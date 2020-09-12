@@ -1264,20 +1264,20 @@ async function run() {
     if (annotations.length) {
       const checkName = core.getInput("checkName");
       const isTest = core.getInput("isTest");
-      if (!isTest) {
 	let leftAnnotations = [...annotations];
 	core.info(leftAnnotations.length)
       	if (leftAnnotations.length > 50) {
 		while (leftAnnotations.length > 50) {
-		let toProcess = leftAnnotations.splice(0, 50);
-		await createCheck(checkName, "flake8 failure", toProcess, isTest);
-		try {
-		  core.setFailed(toProcess);
-		} catch (e) {
-		  core.setFailed(error.message);
-		}
-	      }
-	    }
+			let toProcess = leftAnnotations.splice(0, 50);
+			await createCheck(checkName, "flake8 failure", toProcess, isTest);
+			if (!isTest){
+				try {
+				  core.setFailed(toProcess);
+				} catch (e) {
+				  core.setFailed(error.message);
+				}
+		      }
+		    }
       }
     }
   } catch (error) {
