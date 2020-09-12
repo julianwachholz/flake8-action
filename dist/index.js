@@ -1266,7 +1266,17 @@ async function run() {
       const isTest = core.getInput("isTest");
       await createCheck(checkName, "flake8 failure", annotations, isTest);
       if (!isTest) {
-        core.setFailed(annotations);
+	let leftAnnotations = [...annotations];
+      	if (leftAnnotations.length > 50) {
+		while (leftAnnotations.length > 50) {
+		let toProcess = leftAnnotations.splice(0, 50);
+		try {
+		  core.setFailed(toProcess);
+		} catch (e) {
+		  core.setFailed(error.message);
+		}
+	      }
+	    }
       }
     }
   } catch (error) {
