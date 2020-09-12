@@ -1274,7 +1274,6 @@ async function run() {
 		try {
 		  await core.setFailed(toProcess);
 		} catch (e) {
-		  core.setFailed(toProcess.length)
 		  core.setFailed(error.message);
 		}
 	      }
@@ -1282,7 +1281,7 @@ async function run() {
       }
     }
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error.message + "TEST");
   }
 }
 
