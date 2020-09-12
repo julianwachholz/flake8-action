@@ -1273,7 +1273,7 @@ async function run() {
 		try {
 		  await core.setFailed(toProcess);
 		} catch (e) {
-		  console.log(toProcess.length)
+		  core.info(toProcess.length)
 		  core.setFailed(error.message);
 		}
 	      }
