@@ -8,6 +8,9 @@ inputs:
     description: "The name of the check to add annotations to.
       Generally the same as the job that uses this action"
     required: true
+  path:
+    description: "Path to use for flake8"
+    default: "."
   isTest:
     description: "Used for internal tests."
     default: false
