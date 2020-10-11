@@ -10,6 +10,7 @@ inputs:
     required: true
   isTest:
     description: "Used for internal tests."
+    default: false
 runs:
   using: "node12"
   main: "dist/index.js"
