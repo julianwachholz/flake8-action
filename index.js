@@ -68,7 +68,7 @@ async function run() {
 
     if (annotations.length) {
       const checkName = core.getInput("checkName");
-      const isTest = core.getInput("isTest");
+      const isTest = core.getInput("isTest") === "true";
       await createCheck(checkName, "flake8 failure", annotations, isTest);
       if (!isTest) {
         core.setFailed(annotations);
