@@ -28,10 +28,11 @@ jobs:
         with:
           python-version: "3.8"
       - name: Run flake8
-        uses: julianwachholz/flake8-action@v1.1.0
+        uses: julianwachholz/flake8-action@v2
         with:
           checkName: "Python Lint"
           path: path/to/files
+          config: path/to/flake8.ini
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
