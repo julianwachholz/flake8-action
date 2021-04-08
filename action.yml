@@ -12,8 +12,11 @@ inputs:
     description: "Path to use for flake8"
     default: "."
     required: false
+  config:
+    description: "Specify a config file for flake8"
+    required: false
   isTest:
-    description: "Used for internal tests."
+    description: "Used for internal tests"
     default: "false"
     required: false
 runs:

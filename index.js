@@ -12,17 +12,18 @@ async function installFlake8() {
 
 async function runFlake8() {
   let output = "";
-  let options = {
+  const args = ["--exit-zero"];
+  if (core.getInput("config")) {
+    args.push("--config", core.getInput("config"));
+  }
+  args.push(core.getInput("path"));
+  await exec.exec("flake8", args, {
     listeners: {
       stdout: (data) => {
         output += data.toString();
       },
     },
-  };
-  await exec.exec("flake8", [
-    core.getInput("path"),
-    '--exit-zero'
-  ], options);
+  });
   return output;
 }
 

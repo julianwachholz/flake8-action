@@ -11,21 +11,22 @@ jobs:
   units:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - run: npm ci
       - run: npm test
 
   # test action works running from the graph
   test:
+    name: "Lint Test"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-python@v2
         with:
-          python-version: "3.7"
+          python-version: "3.8"
       - uses: ./
         with:
-          checkName: lint
+          checkName: "Lint Test"
           isTest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
