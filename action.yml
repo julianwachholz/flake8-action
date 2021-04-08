@@ -11,9 +11,11 @@ inputs:
   path:
     description: "Path to use for flake8"
     default: "."
+    required: false
   isTest:
     description: "Used for internal tests."
-    default: false
+    default: "false"
+    required: false
 runs:
   using: "node12"
   main: "dist/index.js"
