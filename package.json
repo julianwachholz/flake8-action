@@ -1,6 +1,6 @@
 {
   "name": "flake8-action",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "description": "Flake8 GitHub Action",
   "main": "index.js",
   "scripts": {
@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/julianwachholz/flake8-action#readme",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/exec": "^1.0.4",
+    "@actions/core": "^1.5.0",
+    "@actions/exec": "^1.1.0",
     "@actions/github": "^4.0.0"
   },
   "devDependencies": {

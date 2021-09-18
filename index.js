@@ -28,9 +28,14 @@ async function runFlake8() {
 }
 
 async function createCheck(check_name, title, annotations, isTest) {
+  let summary = `${annotations.length} errors(s) found`;
+  if (annotations.length > 50) {
+    summary = `${annotations.length} errors(s) found (first 50 shown)`;
+    annotations = annotations.slice(0, 50);
+  }
   const output = {
     title,
-    summary: `${annotations.length} errors(s) found`,
+    summary,
     annotations,
   };
 
