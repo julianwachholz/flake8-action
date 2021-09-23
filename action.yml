@@ -12,6 +12,10 @@ inputs:
     description: "Path to use for flake8"
     default: "."
     required: false
+  plugins:
+    description: "Package names of flake8 plugins passed on to the `pip install` command."
+    default: ""
+    required: false
   config:
     description: "Specify a config file for flake8"
     required: false
