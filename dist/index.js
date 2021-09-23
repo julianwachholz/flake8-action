@@ -14,7 +14,8 @@ const parseFlake8Output = __nccwpck_require__(586);
 const { GITHUB_TOKEN } = process.env;
 
 async function installFlake8() {
-  await exec.exec("pip install flake8");
+  const plugins = core.getInput("plugins");
+  await exec.exec(`pip install flake8 ${plugins}`);
 }
 
 async function runFlake8() {
